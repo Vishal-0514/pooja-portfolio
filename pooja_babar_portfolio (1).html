@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pooja Babar — Social Media Executive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+:root{
+  --bg:#fff5f8;
+  --bg-2:#ffe4ef;
+  --surface:rgba(255,255,255,0.7);
+  --border:rgba(236,72,153,0.18);
+  --text:#3d1f33;
+  --muted:#8a6478;
+  --pink:#ff5fa2;
+  --pink-soft:#ffb6d5;
+  --rose:#ff8fb8;
+  --lavender:#c7a4ff;
+  --peach:#ffc4b0;
+  --gold:#f7c873;
+  --grad: linear-gradient(135deg,#ff8fb8 0%, #ff5fa2 35%, #c084fc 70%, #a78bfa 100%);
+  --grad-2: linear-gradient(135deg,#ffb6d5 0%, #ff8fb8 50%, #c7a4ff 100%);
+  --grad-3: linear-gradient(135deg,#ffd6e7 0%, #ffc4b0 100%);
+  --grad-4: linear-gradient(135deg,#fbcfe8 0%, #ddd6fe 100%);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  line-height:1.6;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(800px 600px at 10% 10%, rgba(255,143,184,0.45), transparent 60%),
+    radial-gradient(700px 500px at 90% 20%, rgba(199,164,255,0.4), transparent 60%),
+    radial-gradient(900px 700px at 50% 100%, rgba(255,196,176,0.35), transparent 60%),
+    var(--bg);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:radial-gradient(rgba(255,95,162,0.08) 1px, transparent 1px);
+  background-size:26px 26px;
+  mask-image:radial-gradient(ellipse at center, black 40%, transparent 80%);
+}
+
+/* Floating decorative emoji/sparkles */
+.deco{
+  position:fixed;font-size:1.5rem;pointer-events:none;z-index:0;opacity:.7;
+  filter:drop-shadow(0 4px 12px rgba(255,95,162,.3));
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 6%;backdrop-filter:blur(20px);
+  background:rgba(255,245,248,0.75);border-bottom:1px solid var(--border);
+}
+.logo{
+  font-family:'Dancing Script',cursive;
+  font-weight:700;font-size:1.9rem;letter-spacing:-.5px;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-weight:500;font-size:.95rem;transition:color .2s;position:relative}
+.nav-links a:hover{color:var(--pink)}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-4px;height:2px;width:0;background:var(--grad);transition:width .3s;border-radius:2px}
+.nav-links a:hover::after{width:100%}
+.burger{display:none;background:none;border:none;color:var(--pink);font-size:1.6rem;cursor:pointer}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:120px 6% 80px;position:relative;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:center;
+  max-width:1200px;width:100%;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 18px;border-radius:999px;
+  background:rgba(255,255,255,0.8);border:1px solid var(--border);
+  font-size:.85rem;color:var(--pink);font-weight:600;margin-bottom:24px;
+  box-shadow:0 8px 24px -10px rgba(255,95,162,.3);
+}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:#ff5fa2;box-shadow:0 0 12px #ff5fa2;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.script{
+  font-family:'Dancing Script',cursive;font-size:clamp(2rem,4vw,3rem);color:var(--pink);
+  font-weight:700;line-height:1;display:block;margin-bottom:6px;
+}
+h1.title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.6rem,6vw,5rem);font-weight:700;line-height:1.05;letter-spacing:-1.5px;
+}
+h1.title .grad{
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:200% 200%;animation:shift 6s ease infinite;font-style:italic;
+}
+@keyframes shift{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+.role{
+  margin-top:18px;font-size:1.15rem;color:var(--muted);font-weight:500;
+}
+.role .heart{color:var(--pink)}
+.tagline{
+  margin-top:14px;font-size:1.05rem;color:var(--muted);max-width:560px;
+}
+.cta-row{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 28px;border-radius:999px;font-weight:600;font-size:.95rem;
+  text-decoration:none;cursor:pointer;border:none;transition:transform .25s, box-shadow .25s;
+}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 12px 30px -8px rgba(255,95,162,.55)}
+.btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 20px 40px -8px rgba(255,95,162,.65)}
+.btn-ghost{background:rgba(255,255,255,0.7);color:var(--pink);border:1.5px solid var(--pink-soft)}
+.btn-ghost:hover{transform:translateY(-3px);background:#fff}
+
+.stats{display:flex;gap:36px;margin-top:48px}
+.stat .num{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:2rem;font-weight:700;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat .lbl{font-size:.85rem;color:var(--muted)}
+
+/* Hero card (insta-mockup) */
+.hero-card{position:relative;perspective:1200px}
+.phone{
+  width:100%;max-width:340px;margin:0 auto;aspect-ratio:9/16;
+  background:linear-gradient(160deg,#fff,#ffeaf3);
+  border-radius:36px;border:1px solid var(--border);
+  padding:18px;position:relative;overflow:hidden;
+  box-shadow:
+    0 30px 80px -20px rgba(255,95,162,.45),
+    0 0 0 8px rgba(255,255,255,0.6),
+    inset 0 1px 0 rgba(255,255,255,1);
+  transform:rotate(-4deg);
+}
+.phone-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.avatar{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--grad);display:flex;align-items:center;justify-content:center;
+  font-weight:800;color:#fff;border:2px solid #fff;
+  box-shadow:0 0 0 2px var(--pink);
+  font-family:'Dancing Script',cursive;font-size:1.3rem;
+}
+.handle{font-weight:600;font-size:.9rem;color:var(--text)}
+.sub{font-size:.7rem;color:var(--muted)}
+.story-row{display:flex;gap:10px;margin-bottom:14px;overflow:hidden}
+.story{width:46px;height:46px;border-radius:50%;background:var(--grad);padding:2px;flex-shrink:0}
+.story span{display:block;width:100%;height:100%;border-radius:50%;background:#fff}
+.post{
+  border-radius:18px;height:48%;background:var(--grad-2);
+  display:flex;align-items:flex-end;padding:14px;color:#fff;font-weight:600;
+  position:relative;overflow:hidden;
+  font-family:'Playfair Display',serif;font-style:italic;
+}
+.post::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.4), transparent 50%);
+}
+.post::after{
+  content:"✨";position:absolute;top:14px;right:16px;font-size:1.4rem;
+}
+.engagement{display:flex;justify-content:space-around;margin-top:14px;color:var(--muted);font-size:.85rem}
+.engagement span{display:flex;align-items:center;gap:6px}
+
+.floating-tag{
+  position:absolute;padding:10px 16px;border-radius:14px;
+  background:rgba(255,255,255,0.9);backdrop-filter:blur(14px);
+  border:1px solid var(--border);font-size:.85rem;font-weight:600;color:var(--text);
+  display:flex;align-items:center;gap:8px;
+  box-shadow:0 12px 30px -10px rgba(255,95,162,.3);
+}
+.tag-1{top:8%;left:-12%}
+.tag-2{bottom:18%;right:-10%}
+.tag-3{top:50%;right:-18%}
+
+/* SECTIONS */
+section{padding:100px 6%;max-width:1200px;margin:0 auto;position:relative}
+.section-head{margin-bottom:60px;text-align:center}
+.kicker{
+  display:inline-block;font-family:'Dancing Script',cursive;font-size:1.4rem;font-weight:700;
+  color:var(--pink);margin-bottom:8px;
+}
+h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-1px;
+}
+h2 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic}
+.section-sub{margin-top:14px;color:var(--muted);max-width:600px;margin-inline:auto}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.about-card{
+  padding:36px;border-radius:28px;
+  background:rgba(255,255,255,0.7);border:1px solid var(--border);
+  position:relative;overflow:hidden;backdrop-filter:blur(10px);
+  box-shadow:0 20px 60px -20px rgba(255,95,162,.2);
+}
+.about-card::before{
+  content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;
+  background:var(--grad);filter:blur(60px);opacity:.4;
+}
+.about-card::after{
+  content:"🌸";position:absolute;top:18px;right:24px;font-size:1.6rem;
+}
+.about-text p{color:var(--muted);margin-bottom:18px;font-size:1.05rem}
+.info-list{list-style:none;margin-top:20px}
+.info-list li{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed var(--border);color:var(--muted)}
+.info-list li strong{color:var(--pink);min-width:110px;font-weight:600}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.skill-card{
+  padding:26px;border-radius:24px;background:rgba(255,255,255,0.75);border:1px solid var(--border);
+  transition:transform .3s, border-color .3s, box-shadow .3s;position:relative;overflow:hidden;
+  backdrop-filter:blur(8px);
+  box-shadow:0 10px 30px -15px rgba(255,95,162,.2);
+}
+.skill-card:hover{transform:translateY(-8px) rotate(-1deg);box-shadow:0 20px 40px -15px rgba(255,95,162,.4);border-color:var(--pink-soft)}
+.skill-icon{
+  width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;margin-bottom:14px;background:var(--grad);color:#fff;font-weight:800;
+  box-shadow:0 8px 20px -6px rgba(255,95,162,.5);
+}
+.skill-card h3{font-size:1.1rem;margin-bottom:10px;color:var(--text)}
+.bar{height:8px;border-radius:999px;background:rgba(255,95,162,.1);overflow:hidden;margin-top:12px}
+.bar span{display:block;height:100%;background:var(--grad);border-radius:999px;width:0;transition:width 1.4s ease}
+.skill-card .pct{font-size:.85rem;color:var(--pink);font-weight:600;margin-top:8px;display:block}
+
+/* EXPERIENCE TIMELINE */
+.timeline{position:relative;max-width:880px;margin:0 auto;padding-left:32px}
+.timeline::before{
+  content:"";position:absolute;left:8px;top:0;bottom:0;width:3px;border-radius:3px;
+  background:linear-gradient(var(--pink),var(--lavender),var(--peach));
+}
+.t-item{position:relative;padding:0 0 50px 36px}
+.t-item::before{
+  content:"♡";position:absolute;left:-10px;top:-2px;width:32px;height:32px;border-radius:50%;
+  background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+  box-shadow:0 0 0 5px var(--bg), 0 8px 20px rgba(255,95,162,.5);
+}
+.t-card{
+  padding:24px 26px;border-radius:20px;
+  background:rgba(255,255,255,0.75);border:1px solid var(--border);
+  box-shadow:0 12px 32px -16px rgba(255,95,162,.25);
+}
+.t-date{font-size:.8rem;color:var(--pink);font-weight:700;letter-spacing:1px}
+.t-role{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;margin:6px 0 2px}
+.t-company{color:var(--lavender);font-weight:600;margin-bottom:14px;font-style:italic}
+.t-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.t-list li{color:var(--muted);padding-left:22px;position:relative;font-size:.95rem}
+.t-list li::before{content:"✿";position:absolute;left:0;top:0;color:var(--pink);font-size:.8rem}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.proj{
+  border-radius:24px;padding:0;background:rgba(255,255,255,0.8);border:1px solid var(--border);
+  overflow:hidden;transition:transform .3s, box-shadow .3s;
+  box-shadow:0 12px 30px -16px rgba(255,95,162,.25);
+}
+.proj:hover{transform:translateY(-8px);box-shadow:0 24px 50px -16px rgba(255,95,162,.4)}
+.proj-cover{height:180px;background:var(--grad);position:relative;display:flex;align-items:flex-end;padding:18px;color:#fff}
+.proj:nth-child(2) .proj-cover{background:var(--grad-2)}
+.proj:nth-child(3) .proj-cover{background:linear-gradient(135deg,#fbcfe8,#a78bfa)}
+.proj:nth-child(4) .proj-cover{background:linear-gradient(135deg,#ffc4b0,#ff8fb8)}
+.proj-cover::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 20%, rgba(255,255,255,.35), transparent 50%)}
+.proj-tag{font-size:.75rem;font-weight:600;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.35);backdrop-filter:blur(6px);position:relative;z-index:1}
+.proj-body{padding:22px}
+.proj-body h3{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:8px}
+.proj-body p{color:var(--muted);font-size:.95rem;margin-bottom:14px}
+.proj-meta{display:flex;gap:14px;color:var(--muted);font-size:.85rem;flex-wrap:wrap}
+
+/* EDUCATION */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.edu-card{
+  padding:26px;border-radius:24px;background:rgba(255,255,255,0.8);border:1px solid var(--border);
+  transition:transform .3s;position:relative;overflow:hidden;
+  box-shadow:0 10px 28px -16px rgba(255,95,162,.25);
+}
+.edu-card::after{content:"🎀";position:absolute;top:16px;right:18px;font-size:1.3rem}
+.edu-card:hover{transform:translateY(-6px) rotate(-1deg)}
+.edu-year{display:inline-block;font-size:.8rem;padding:5px 12px;border-radius:999px;background:var(--grad);color:#fff;font-weight:700;margin-bottom:12px;letter-spacing:.5px}
+.edu-card h3{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:4px}
+.edu-card p{color:var(--muted);font-size:.95rem}
+
+/* CONTACT */
+.contact{
+  text-align:center;padding:80px 30px;border-radius:36px;
+  background:rgba(255,255,255,0.8);border:1px solid var(--border);position:relative;overflow:hidden;
+  box-shadow:0 30px 80px -30px rgba(255,95,162,.35);
+}
+.contact::before{
+  content:"";position:absolute;inset:0;opacity:.5;
+  background:radial-gradient(circle at 50% 0%, var(--pink-soft), transparent 60%);
+}
+.contact::after{
+  content:"💖";position:absolute;font-size:3rem;top:20px;right:30px;opacity:.5;
+}
+.contact-content{position:relative;z-index:1}
+.contact h2{margin-bottom:14px}
+.contact p{color:var(--muted);margin-bottom:30px}
+.socials{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:30px}
+.social{
+  width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.9);border:1px solid var(--border);color:var(--pink);text-decoration:none;
+  transition:transform .3s, background .3s, color .3s;font-weight:700;
+  box-shadow:0 8px 20px -10px rgba(255,95,162,.4);
+}
+.social:hover{transform:translateY(-6px) scale(1.08);background:var(--grad);color:#fff;border-color:transparent}
+
+footer{text-align:center;padding:40px 6%;color:var(--muted);font-size:.9rem;border-top:1px solid var(--border)}
+footer .heart{color:var(--pink)}
+
+/* RESPONSIVE */
+@media (max-width:880px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(255,245,248,0.97);flex-direction:column;padding:24px;gap:18px;border-bottom:1px solid var(--border)}
+  .nav-links.open{display:flex}
+  .burger{display:block}
+  .hero-grid{grid-template-columns:1fr;gap:40px;text-align:center}
+  .badge,.stats{justify-content:center}
+  .stats{justify-content:space-around}
+  .cta-row{justify-content:center}
+  .about-grid{grid-template-columns:1fr}
+  .floating-tag{display:none}
+  .tagline{margin-inline:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- Floating sparkles (animated by GSAP) -->
+<div class="deco" data-deco style="top:14%;left:6%">🌸</div>
+<div class="deco" data-deco style="top:30%;right:8%">✨</div>
+<div class="deco" data-deco style="top:60%;left:4%">💖</div>
+<div class="deco" data-deco style="top:78%;right:6%">🦋</div>
+<div class="deco" data-deco style="top:45%;left:50%">⭐</div>
+
+<nav>
+  <div class="logo" data-nav-anim>Pooja ♡</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="burger" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="badge" data-hero><span class="dot"></span> Available for new opportunities ✨</div>
+      <span class="script" data-hero>Hi lovelies, I'm</span>
+      <h1 class="title" data-hero-title>
+        <span class="grad">Pooja Babar</span><br>
+        crafting scroll-stopping social stories.
+      </h1>
+      <p class="role" data-hero>Social Media Executive <span class="heart">♡</span> Content Creator <span class="heart">♡</span> Brand Storyteller</p>
+      <p class="tagline" data-hero>Turning brands into conversations and feeds into communities — one reel, post, and pretty pixel at a time.</p>
+      <div class="cta-row" data-hero>
+        <a href="#contact" class="btn btn-primary">Let's Collaborate ✨</a>
+        <a href="#projects" class="btn btn-ghost">View My Work</a>
+      </div>
+      <div class="stats" data-hero>
+        <div class="stat"><div class="num" data-count="2">0</div><div class="lbl">Years Experience</div></div>
+        <div class="stat"><div class="num" data-count="50">0</div><div class="lbl">Campaigns Run</div></div>
+        <div class="stat"><div class="num" data-count="7">0</div><div class="lbl">Creative Tools</div></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="phone" data-phone>
+        <div class="phone-header">
+          <div class="avatar">P</div>
+          <div>
+            <div class="handle">@poojababar</div>
+            <div class="sub">Mumbai · Creator 🌸</div>
+          </div>
+        </div>
+        <div class="story-row">
+          <div class="story"><span></span></div>
+          <div class="story"><span></span></div>
+          <div class="story"><span></span></div>
+          <div class="story"><span></span></div>
+          <div class="story"><span></span></div>
+        </div>
+        <div class="post">New campaign drop</div>
+        <div class="engagement">
+          <span>♥ 12.4k</span><span>💬 842</span><span>↗ 1.2k</span>
+        </div>
+      </div>
+      <div class="floating-tag tag-1" data-float>🎨 Canva Pro</div>
+      <div class="floating-tag tag-2" data-float>🎬 Reels Editor</div>
+      <div class="floating-tag tag-3" data-float>🤖 ManyChat</div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-head">
+    <span class="kicker" data-reveal>about me</span>
+    <h2 data-reveal>The story <span class="grad">behind the feed</span></h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-card" data-reveal>
+      <div class="about-text">
+        <p>I'm a Social Media & Digital Marketing girlie with 2+ years of experience turning brands into engaging digital experiences. From crafting festive creatives to running multi-platform campaigns, I live where strategy meets aesthetics. 💕</p>
+        <p>I specialize in content creation, influencer marketing, lead generation, SEO support, and brand storytelling — backed by a strong design toolkit and a sharp eye for trends.</p>
+      </div>
+    </div>
+    <div data-reveal>
+      <ul class="info-list">
+        <li><strong>Name</strong><span>Pooja Babar</span></li>
+        <li><strong>Role</strong><span>Social Media Executive</span></li>
+        <li><strong>Location</strong><span>Mumbai, India 🌴</span></li>
+        <li><strong>Email</strong><span>babarpooja2000@gmail.com</span></li>
+        <li><strong>Phone</strong><span>+91 83559 33983</span></li>
+        <li><strong>Languages</strong><span>English · Hindi · Marathi</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-head">
+    <span class="kicker" data-reveal>my skills</span>
+    <h2 data-reveal>My <span class="grad">creative toolkit</span> ✨</h2>
+    <p class="section-sub" data-reveal>From design to automation to motion — a full-stack social media skillset, with extra sparkle.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card" data-skill><div class="skill-icon">Cv</div><h3>Canva</h3><div class="bar"><span data-pct="95"></span></div><span class="pct">95%</span></div>
+    <div class="skill-card" data-skill><div class="skill-icon">Ai</div><h3>Adobe Illustrator</h3><div class="bar"><span data-pct="85"></span></div><span class="pct">85%</span></div>
+    <div class="skill-card" data-skill><div class="skill-icon">Ae</div><h3>Adobe After Effects</h3><div class="bar"><span data-pct="80"></span></div><span class="pct">80%</span></div>
+    <div class="skill-card" data-skill><div class="skill-icon">Cd</div><h3>CorelDRAW</h3><div class="bar"><span data-pct="90"></span></div><span class="pct">90%</span></div>
+    <div class="skill-card" data-skill><div class="skill-icon">⚙</div><h3>Automation Tools</h3><div class="bar"><span data-pct="85"></span></div><span class="pct">85%</span></div>
+    <div class="skill-card" data-skill><div class="skill-icon">🤖</div><h3>AI Tools</h3><div class="bar"><span data-pct="88"></span></div><span class="pct">88%</span></div>
+    <div class="skill-card" data-skill><div class="skill-icon">🎬</div><h3>Video Editing</h3><div class="bar"><span data-pct="90"></span></div><span class="pct">90%</span></div>
+    <div class="skill-card" data-skill><div class="skill-icon">📊</div><h3>Strategy & Analytics</h3><div class="bar"><span data-pct="82"></span></div><span class="pct">82%</span></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-head">
+    <span class="kicker" data-reveal>experience</span>
+    <h2 data-reveal>Where I've <span class="grad">made magic</span></h2>
+  </div>
+  <div class="timeline">
+    <div class="t-item" data-reveal>
+      <div class="t-card">
+        <div class="t-date">OCT 2024 — PRESENT</div>
+        <div class="t-role">Social Media Executive</div>
+        <div class="t-company">Mirchandani Group</div>
+        <ul class="t-list">
+          <li>Coordinate with external marketing agencies to execute digital campaigns and maintain consistent brand communication.</li>
+          <li>Design festive creatives, static posts, carousels, stories, banners, and promotional materials using Canva & CorelDRAW.</li>
+          <li>Create, edit, and publish engaging reels and short-form video content to boost engagement and visibility.</li>
+          <li>Develop content concepts, campaign ideas, scripts, and brand storytelling aligned with business objectives.</li>
+          <li>Support SEO and digital marketing initiatives while analyzing performance for data-driven improvements.</li>
+          <li>Conduct competitor research, audience analysis, and trend monitoring to strengthen brand positioning.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="t-item" data-reveal>
+      <div class="t-card">
+        <div class="t-date">JAN 2024 — AUG 2024</div>
+        <div class="t-role">Social Media Head</div>
+        <div class="t-company">Dona Veda Private Ltd</div>
+        <ul class="t-list">
+          <li>Managed end-to-end social media operations across Instagram, Facebook, LinkedIn, and X (Twitter).</li>
+          <li>Planned, scheduled, and published content calendars while coordinating with designers and video editors.</li>
+          <li>Monitored performance, analyzed engagement metrics, and generated reports to optimize strategy.</li>
+          <li>Implemented ManyChat automation workflows to streamline customer interactions and lead generation.</li>
+          <li>Executed influencer marketing campaigns — research, outreach, collaboration, and performance tracking.</li>
+          <li>Managed online communities and stayed on top of platform trends and algorithm changes.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-head">
+    <span class="kicker" data-reveal>projects</span>
+    <h2 data-reveal>Selected <span class="grad">campaigns & work</span></h2>
+  </div>
+  <div class="proj-grid">
+    <div class="proj" data-proj>
+      <div class="proj-cover"><span class="proj-tag">Brand Campaign</span></div>
+      <div class="proj-body">
+        <h3>Festive Creative Series 🌸</h3>
+        <p>Designed a full festive creative suite — posts, stories, and banners — for multi-platform brand activation.</p>
+        <div class="proj-meta"><span>🎨 Canva</span><span>🖌 CorelDRAW</span></div>
+      </div>
+    </div>
+    <div class="proj" data-proj>
+      <div class="proj-cover"><span class="proj-tag">Short-Form Video</span></div>
+      <div class="proj-body">
+        <h3>Reels & Shorts Strategy 🎬</h3>
+        <p>Concepted, scripted, and edited a recurring reels series driving consistent engagement growth.</p>
+        <div class="proj-meta"><span>🎬 After Effects</span><span>✂ Video Editing</span></div>
+      </div>
+    </div>
+    <div class="proj" data-proj>
+      <div class="proj-cover"><span class="proj-tag">Automation</span></div>
+      <div class="proj-body">
+        <h3>ManyChat Lead Funnel 🤖</h3>
+        <p>Built automation workflows for instant customer responses, lead nurturing, and DM-to-sale conversion.</p>
+        <div class="proj-meta"><span>🤖 ManyChat</span><span>📈 Lead Gen</span></div>
+      </div>
+    </div>
+    <div class="proj" data-proj>
+      <div class="proj-cover"><span class="proj-tag">Influencer Marketing</span></div>
+      <div class="proj-body">
+        <h3>Creator Collaboration Program 💕</h3>
+        <p>End-to-end influencer campaign — discovery, outreach, briefing, and performance reporting.</p>
+        <div class="proj-meta"><span>🤝 Outreach</span><span>📊 Analytics</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-head">
+    <span class="kicker" data-reveal>education</span>
+    <h2 data-reveal>Academic <span class="grad">background</span></h2>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card" data-edu>
+      <span class="edu-year">2022</span>
+      <h3>BA in Economics</h3>
+      <p>Siddharth College</p>
+    </div>
+    <div class="edu-card" data-edu>
+      <span class="edu-year">2018</span>
+      <h3>HSC, Commerce</h3>
+      <p>K.G. Mittal College</p>
+    </div>
+    <div class="edu-card" data-edu>
+      <span class="edu-year">2016</span>
+      <h3>SSC</h3>
+      <p>V.V.S.S. Vidya Mandir</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact" data-reveal>
+    <div class="contact-content">
+      <span class="kicker">get in touch</span>
+      <h2>Let's create something <span class="grad">unforgettable</span> 💖</h2>
+      <p>Open to full-time roles, freelance projects, and brand collaborations.</p>
+      <a href="mailto:babarpooja2000@gmail.com" class="btn btn-primary">babarpooja2000@gmail.com</a>
+      <div class="socials">
+        <a class="social" href="mailto:babarpooja2000@gmail.com" title="Email">✉</a>
+        <a class="social" href="tel:+918355933983" title="Phone">📞</a>
+        <a class="social" href="#" title="LinkedIn">in</a>
+        <a class="social" href="#" title="Instagram">◎</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Designed & built with <span class="heart">♥</span> by Pooja Babar · Mumbai, India
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// --- HERO INTRO TIMELINE ---
+const heroTl = gsap.timeline({defaults:{ease:"power3.out"}});
+heroTl.from('nav .logo',{y:-30,opacity:0,duration:.8})
+      .from('.nav-links li',{y:-20,opacity:0,stagger:.08,duration:.6},'-=.4')
+      .from('[data-hero]',{y:40,opacity:0,stagger:.12,duration:.8},'-=.3')
+      .from('[data-hero-title]',{y:60,opacity:0,duration:1},'-=.7')
+      .from('.phone',{x:120,opacity:0,rotation:8,duration:1.2,ease:"power4.out"},'-=1')
+      .from('[data-float]',{scale:0,opacity:0,stagger:.15,duration:.6,ease:"back.out(2)"},'-=.6');
+
+// --- Phone floating loop ---
+gsap.to('.phone',{y:-18,rotation:-6,duration:3.5,ease:"sine.inOut",yoyo:true,repeat:-1});
+
+// --- Floating tags loop ---
+gsap.to('.tag-1',{y:-14,duration:3,ease:"sine.inOut",yoyo:true,repeat:-1});
+gsap.to('.tag-2',{y:14,duration:3.6,ease:"sine.inOut",yoyo:true,repeat:-1,delay:.4});
+gsap.to('.tag-3',{x:10,y:-10,duration:4,ease:"sine.inOut",yoyo:true,repeat:-1,delay:.8});
+
+// --- Decorative sparkles ---
+gsap.utils.toArray('[data-deco]').forEach((el,i)=>{
+  gsap.to(el,{
+    y:`+=${20+i*5}`,x:`+=${10+i*3}`,rotation:i%2?15:-15,
+    duration:3+i*.6,ease:"sine.inOut",yoyo:true,repeat:-1,delay:i*.3
+  });
+});
+
+// --- Counter animation ---
+document.querySelectorAll('[data-count]').forEach(el=>{
+  const target = +el.dataset.count;
+  ScrollTrigger.create({
+    trigger:el,start:"top 90%",once:true,
+    onEnter:()=>{
+      gsap.to(el,{innerText:target,duration:1.6,ease:"power2.out",snap:{innerText:1},
+        onUpdate:()=>{el.innerText = Math.floor(el.innerText) + '+';}});
+    }
+  });
+});
+
+// --- Generic reveal ---
+gsap.utils.toArray('[data-reveal]').forEach(el=>{
+  gsap.from(el,{
+    y:60,opacity:0,duration:.9,ease:"power3.out",
+    scrollTrigger:{trigger:el,start:"top 88%",toggleActions:"play none none none"}
+  });
+});
+
+// --- Skill cards stagger + bar fill ---
+gsap.utils.toArray('.skills-grid').forEach(grid=>{
+  ScrollTrigger.create({
+    trigger:grid,start:"top 85%",once:true,
+    onEnter:()=>{
+      gsap.from(grid.querySelectorAll('[data-skill]'),{
+        y:60,opacity:0,scale:.9,stagger:.08,duration:.7,ease:"back.out(1.4)"
+      });
+      grid.querySelectorAll('.bar span').forEach(b=>{
+        gsap.to(b,{width:b.dataset.pct+'%',duration:1.4,ease:"power2.out",delay:.3});
+      });
+    }
+  });
+});
+
+// --- Projects stagger ---
+gsap.from('[data-proj]',{
+  y:80,opacity:0,stagger:.12,duration:.9,ease:"power3.out",
+  scrollTrigger:{trigger:'.proj-grid',start:"top 85%"}
+});
+
+// --- Education stagger ---
+gsap.from('[data-edu]',{
+  y:60,opacity:0,scale:.9,stagger:.15,duration:.7,ease:"back.out(1.4)",
+  scrollTrigger:{trigger:'.edu-grid',start:"top 85%"}
+});
+
+// --- Card hover wobble ---
+document.querySelectorAll('.skill-card, .proj, .edu-card').forEach(c=>{
+  c.addEventListener('mouseenter',()=>gsap.to(c,{rotation:gsap.utils.random(-2,2),duration:.4,ease:"power2.out"}));
+  c.addEventListener('mouseleave',()=>gsap.to(c,{rotation:0,duration:.4,ease:"power2.out"}));
+});
+
+// Close mobile nav on link click
+document.querySelectorAll('#navLinks a').forEach(a=>{
+  a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'));
+});
+</script>
+</body>
+</html>
